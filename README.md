@@ -36,7 +36,7 @@ Residual Attention Layer Transformer, shortened as RealFormer, is a transformer 
 
 ## Implementation Notes
 
--   Just like `torch.nn.TransformerEncoder`, the `RealFormerEncoder` does not include any embedding layers. Hence, you shoud include positional encoding schemes to use the model.
+-   Just like `torch.nn.TransformerEncoder`, the `RealFormerEncoder` does not include any embedding layers. It is recommended that you implemenet positional encoding schemes (e.g. sinusodial tables, learnable embeddings) as needed.
 -   The authors mention that RealFormer layers can be used as drop-in replacements for any transformer model, whether they be autoencoding (encoders) or auto-regressive (decoders). We closely follow the flow of the paper and include only an encoder version of the implementation for now.
 
 ## Resources
