@@ -67,8 +67,11 @@ class RealFormerEncoderLayer(nn.Module):
         self.norm2 = nn.LayerNorm(d_model)
 
     def forward(self, x, prev=None):
-        out, prev = self.attn(x, prev)
-        x = self.norm1(x + out)
-        x = self.norm2(x + self.ff(x))
-        return x, prev
+        residual = x
+        x, prev = self.attn(x, prev)
+        x = self.norm1(x + residual)
+        residual = x
+        x = self.ff(x)
+        out = self.norm2(x + residual)
+        return out, prev
 
