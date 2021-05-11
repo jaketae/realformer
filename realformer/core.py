@@ -75,3 +75,27 @@ class RealFormerEncoderLayer(nn.Module):
         out = self.norm2(x + residual)
         return out, prev
 
+
+class RealFormerEncoder(nn.Module):
+    def __init__(
+        self,
+        d_model=512,
+        num_heads=8,
+        expansion_factor=2,
+        dropout=0.5,
+        max_len=512,
+        num_layers=6,
+    ):
+        super().__init__()
+        self.layers = nn.ModuleList(
+            [
+                RealFormerEncoderLayer(d_model, num_heads, expansion_factor, dropout)
+                for _ in range(num_layers)
+            ]
+        )
+
+    def forward(self, x):
+        prev = None
+        for layer in self.layers:
+            x, prev = layer(x, prev)
+        return x
