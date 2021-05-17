@@ -83,7 +83,6 @@ class RealFormerEncoder(nn.Module):
         num_heads=8,
         expansion_factor=2,
         dropout=0.5,
-        max_len=512,
         num_layers=6,
     ):
         super().__init__()
